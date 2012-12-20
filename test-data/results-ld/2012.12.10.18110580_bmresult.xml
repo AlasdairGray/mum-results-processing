@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bsbm lang="sparql" start="2012.12.10.18110580" end="2012.12.10.18265486">
+  <querymix>
+     <warmups>10</warmups>
+     <seed>808080</seed>
+     <querymixruns>50</querymixruns>
+     <minquerymixruntime>6.9972</minquerymixruntime>
+     <maxquerymixruntime>7.3921</maxquerymixruntime>
+     <totalruntime>357.593</totalruntime>
+     <qmph>503.37</qmph>
+     <cqet>7.15185</cqet>
+     <cqetg>7.15148</cqetg>
+  </querymix>
+  <queries>
+    <query nr="1">
+      <querystring><![CDATA[
+
+        	
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX chemspider: <http://rdf.chemspider.com/#> 
+PREFIX sio: <http://semanticscience.org/resource/> 
+PREFIX drugbank: <http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugbank/> 
+SELECT DISTINCT ?compound_name ?molformula ?molweight ?inchi ?inchi_key ?smiles   
+WHERE { 
+        GRAPH <http://www.conceptwiki.org> { 
+                <http://www.conceptwiki.org/concept/ef9c1204-c447-4322-9432-ded0ef79f6b9> skos:prefLabel ?compound_name. 
+                <http://www.conceptwiki.org/concept/ef9c1204-c447-4322-9432-ded0ef79f6b9> skos:exactMatch ?csid .
+                <http://www.conceptwiki.org/concept/ef9c1204-c447-4322-9432-ded0ef79f6b9> skos:exactMatch ?chemblid .
+        } 
+        GRAPH <http://www.chemspider.com> { 
+                ?csid chemspider:inchi ?inchi; 
+                        chemspider:inchikey ?inchi_key; 
+                        chemspider:smiles ?smiles . 
+        } 
+        GRAPH <http://data.kasabi.com/dataset/chembl-rdf> { 
+                ?chemblid sio:CHEMINF_000200 _:node1 . 
+                _:node1 a sio:CHEMINF_000042 ; 
+                        sio:SIO_000300 ?molformula 
+                OPTIONAL { ?chemblid sio:CHEMINF_000200 _:node5 . 
+                        _:node5 a sio:CHEMINF_000198 ; 
+                                sio:SIO_000300 ?molweight } 
+        } 
+} 
+			
+        
+
+       ]]>
+      </querystring>
+      <executecount>50</executecount>
+      <aqet>0.014742</aqet>
+      <aqetg>0.014556</aqetg>
+      <qps>67.83</qps>
+      <minqet>0.01079500</minqet>
+      <maxqet>0.01935400</maxqet>
+      <avgresults>1.00</avgresults>
+      <minresults>1</minresults>
+      <maxresults>1</maxresults>
+      <timeoutcount>0</timeoutcount>
+    </query>
+    <query nr="2">
+      <querystring><![CDATA[
+
+        	
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX chemspider: <http://rdf.chemspider.com/#> 
+PREFIX sio: <http://semanticscience.org/resource/> 
+PREFIX drugbank: <http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugbank/> 
+SELECT DISTINCT ?compound_name ?csid_uri ?molformula ?molweight ?inchi ?inchi_key ?smiles  ?alogp ?hba ?hbd ?mw_freebase ?num_ro5_violations ?psa ?rtb ?meltingPoint ?affectedOrganism ?biotransformation ?description ?indication ?proteinBinding ?toxicity 
+WHERE { 
+        GRAPH <http://www.conceptwiki.org> { 
+                <http://www.conceptwiki.org/concept/2b8ce87f-087a-470e-af25-802d46ba66d9> skos:prefLabel ?compound_name. 
+                <http://www.conceptwiki.org/concept/2b8ce87f-087a-470e-af25-802d46ba66d9> skos:exactMatch ?csid .
+                <http://www.conceptwiki.org/concept/2b8ce87f-087a-470e-af25-802d46ba66d9> skos:exactMatch ?chemblid .
+        		OPTIONAL { <http://www.conceptwiki.org/concept/2b8ce87f-087a-470e-af25-802d46ba66d9> skos:exactMatch ?drugbankid }
+        } 
+        GRAPH <http://www.chemspider.com> { 
+                ?csid chemspider:inchi ?inchi; 
+                        chemspider:inchikey ?inchi_key; 
+                        chemspider:smiles ?smiles . 
+        } 
+        GRAPH <http://data.kasabi.com/dataset/chembl-rdf> { 
+                ?chemblid sio:CHEMINF_000200 _:node1 . 
+                _:node1 a sio:CHEMINF_000042 ; 
+                        sio:SIO_000300 ?molformula 
+                OPTIONAL { ?chemblid sio:CHEMINF_000200 _:node2 . 
+                        _:node2 a sio:CHEMINF_000305 ;
+                                sio:SIO_000300 ?alogp } 
+                OPTIONAL { ?chemblid sio:CHEMINF_000200 _:node3 . 
+                        _:node3 a sio:CHEMINF_000309 ; 
+                                sio:SIO_000300 ?hba } 
+                OPTIONAL { ?chemblid sio:CHEMINF_000200 _:node4 . 
+                        _:node4 a sio:CHEMINF_000310 ; 
+                                sio:SIO_000300 ?hbd } 
+                OPTIONAL { ?chemblid sio:CHEMINF_000200 _:node5 . 
+                        _:node5 a sio:CHEMINF_000198 ; 
+                                sio:SIO_000300 ?molweight } 
+                OPTIONAL { ?chemblid sio:CHEMINF_000200 _:node6 . 
+                        _:node6 a sio:CHEMINF_000350 ; 
+                                sio:SIO_000300 ?mw_freebase } 
+                OPTIONAL { ?chemblid sio:CHEMINF_000200 _:node7 . 
+                        _:node7 a sio:CHEMINF_000314 ; 
+                                sio:SIO_000300 ?num_ro5_violations } 
+                OPTIONAL { ?chemblid sio:CHEMINF_000200 _:node8 . 
+                        _:node8 a sio:CHEMINF_000308 ; 
+                                sio:SIO_000300 ?psa } 
+                OPTIONAL { ?chemblid sio:CHEMINF_000200 _:node9 . 
+                        _:node9 a sio:CHEMINF_000311 ; 
+                                sio:SIO_000300 ?rtb } 
+        } 
+        OPTIONAL { GRAPH <http://linkedlifedata.com/resource/drugbank> { 
+                OPTIONAL { ?drugbankid drugbank:affectedOrganism ?affectedOrganism } 
+                OPTIONAL { ?drugbankid drugbank:biotransformation ?biotransformation } 
+                OPTIONAL { ?drugbankid drugbank:description ?description } 
+                OPTIONAL { ?drugbankid drugbank:indication ?indication } 
+                OPTIONAL { ?drugbankid drugbank:proteinBinding ?proteinBinding } 
+                OPTIONAL { ?drugbankid drugbank:toxicity ?toxicity } 
+                OPTIONAL { ?drugbankid drugbank:meltingPoint ?meltingPoint } 
+        } } 
+} 
+			
+        
+
+       ]]>
+      </querystring>
+      <executecount>50</executecount>
+      <aqet>0.257230</aqet>
+      <aqetg>0.256941</aqetg>
+      <qps>3.89</qps>
+      <minqet>0.23735200</minqet>
+      <maxqet>0.29518500</maxqet>
+      <avgresults>1.00</avgresults>
+      <minresults>1</minresults>
+      <maxresults>1</maxresults>
+      <timeoutcount>0</timeoutcount>
+    </query>
+    <query nr="3">
+      <querystring><![CDATA[
+
+			
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX chemspider: <http://rdf.chemspider.com/#> 
+PREFIX sio: <http://semanticscience.org/resource/> 
+PREFIX chembl: <http://rdf.farmbio.uu.se/chembl/onto/#> 
+PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+SELECT ?compound_name ?target_name ?target_organism ?csid_uri ?smiles ?inchi ?inchi_key  ?std_type ?relation ?std_value ?std_unit ?molweight ?num_ro5_violations 
+WHERE { 
+        GRAPH <http://www.conceptwiki.org> { 
+                <http://www.conceptwiki.org/concept/9827436b-0f4f-453c-a1f3-5b9b6f84097f> skos:prefLabel ?compound_name. 
+                <http://www.conceptwiki.org/concept/9827436b-0f4f-453c-a1f3-5b9b6f84097f> skos:exactMatch ?csid .
+                <http://www.conceptwiki.org/concept/9827436b-0f4f-453c-a1f3-5b9b6f84097f> skos:exactMatch ?chemblid .
+        } 
+        GRAPH <http://www.chemspider.com> { 
+                ?csid chemspider:inchi ?inchi; 
+                        chemspider:inchikey ?inchi_key; 
+                        chemspider:smiles ?smiles . 
+        } 
+        GRAPH <http://data.kasabi.com/dataset/chembl-rdf> { 
+                ?activity_uri chembl:forMolecule ?chemblid ; 
+                        chembl:type ?std_type ; 
+                        chembl:relation ?relation ; 
+                        chembl:standardValue ?std_value ; 
+                        chembl:standardUnits ?std_unit ; 
+                        chembl:onAssay ?assay_uri . 
+                ?assay_uri chembl:hasTarget ?target_uri . 
+                ?target_uri dc:title ?target_name ; 
+                        chembl:organism ?target_organism . 
+                OPTIONAL { ?chemblid sio:CHEMINF_000200 _:node1 . 
+                        _:node1 a sio:CHEMINF_000314 ; 
+                                sio:SIO_000300 ?num_ro5_violations } 
+                OPTIONAL { ?chemblid sio:CHEMINF_000200 _:node2 . 
+                        _:node2 a sio:CHEMINF_000198 ; 
+                                sio:SIO_000300 ?molweight }                 
+        } 
+} 
+			
+		
+
+       ]]>
+      </querystring>
+      <executecount>50</executecount>
+      <aqet>0.086407</aqet>
+      <aqetg>0.085966</aqetg>
+      <qps>11.57</qps>
+      <minqet>0.07283700</minqet>
+      <maxqet>0.11497800</maxqet>
+      <avgresults>15.00</avgresults>
+      <minresults>15</minresults>
+      <maxresults>15</maxresults>
+      <timeoutcount>0</timeoutcount>
+    </query>
+    <query nr="4">
+      <querystring><![CDATA[
+
+			
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX chembl: <http://rdf.farmbio.uu.se/chembl/onto/#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX drugbank: <http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugbank/> 
+SELECT DISTINCT ?target_name ?target_type (GROUP_CONCAT( DISTINCT ?synonym ; SEPARATOR=" , " ) as ?synonyms)  
+WHERE { 
+        GRAPH <http://www.conceptwiki.org> { 
+                <http://www.conceptwiki.org/concept/83957fe5-0f90-4689-9a7c-e8038c9ad1f6> skos:prefLabel ?target_name. 
+                <http://www.conceptwiki.org/concept/83957fe5-0f90-4689-9a7c-e8038c9ad1f6> skos:exactMatch ?chemblid .
+        } 
+        GRAPH <http://data.kasabi.com/dataset/chembl-rdf> { 
+                ?chemblid rdfs:subClassOf ?target_type ; 
+                        rdfs:label ?synonym 
+        } 
+} 
+GROUP BY ?target_name ?target_type
+			
+		
+
+       ]]>
+      </querystring>
+      <executecount>50</executecount>
+      <aqet>0.005773</aqet>
+      <aqetg>0.005595</aqetg>
+      <qps>173.22</qps>
+      <minqet>0.00442800</minqet>
+      <maxqet>0.01008200</maxqet>
+      <avgresults>1.00</avgresults>
+      <minresults>1</minresults>
+      <maxresults>1</maxresults>
+      <timeoutcount>0</timeoutcount>
+    </query>
+    <query nr="5">
+      <querystring><![CDATA[
+
+			
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX chembl: <http://rdf.farmbio.uu.se/chembl/onto/#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX drugbank: <http://www4.wiwiss.fu-berlin.de/drugbank/resource/drugbank/> 
+SELECT DISTINCT ?target_name ?target_type ?description ?organism (GROUP_CONCAT( DISTINCT ?keyword ; SEPARATOR=" , ") as ?keywords ) (GROUP_CONCAT( DISTINCT ?synonym ; SEPARATOR=" , " ) as ?synonyms) (GROUP_CONCAT( DISTINCT ?cellularLocation ; SEPARATOR=" , " ) as ?cellularLocations ) ?molecularWeight ?numberOfResidues ?pdbIdPage ?specificFunction ?theoreticalPi 
+WHERE { 
+        GRAPH <http://www.conceptwiki.org> { 
+                <http://www.conceptwiki.org/concept/3a93bb3f-b1d2-4b24-aec9-a0a6aed07455> skos:prefLabel ?target_name. 
+                <http://www.conceptwiki.org/concept/3a93bb3f-b1d2-4b24-aec9-a0a6aed07455> skos:exactMatch ?chemblid .
+        		OPTIONAL { <http://www.conceptwiki.org/concept/3a93bb3f-b1d2-4b24-aec9-a0a6aed07455> skos:exactMatch ?drugbankid }
+        } 
+        GRAPH <http://data.kasabi.com/dataset/chembl-rdf> { 
+                ?chemblid chembl:hasKeyword ?keyword ; 
+                        chembl:hasDescription ?description ; 
+                        rdfs:subClassOf ?target_type ; 
+                        chembl:organism ?organism ; 
+                        rdfs:label ?synonym 
+        } 
+        OPTIONAL { GRAPH <http://linkedlifedata.com/resource/drugbank> { 
+                OPTIONAL { ?drugbankid drugbank:cellularLocation ?cellularLocation } 
+                OPTIONAL { ?drugbankid drugbank:molecularWeight ?molecularWeight } 
+                OPTIONAL { ?drugbankid drugbank:numberOfResidues ?numberOfResidues } 
+                OPTIONAL { ?drugbankid drugbank:pdbIdPage ?pdbIdPage } 
+                OPTIONAL { ?drugbankid drugbank:specificFunction ?specificFunction } 
+                OPTIONAL { ?drugbankid drugbank:theoreticalPi ?theoreticalPi } 
+        } } 
+} 
+GROUP BY ?target_name ?target_type ?description ?organism ?molecularWeight ?numberOfResidues ?pdbIdPage ?specificFunction ?theoreticalPi 
+			
+		
+
+       ]]>
+      </querystring>
+      <executecount>50</executecount>
+      <aqet>6.681926</aqet>
+      <aqetg>6.681583</aqetg>
+      <qps>0.15</qps>
+      <minqet>6.53569700</minqet>
+      <maxqet>6.88901100</maxqet>
+      <avgresults>1.00</avgresults>
+      <minresults>1</minresults>
+      <maxresults>1</maxresults>
+      <timeoutcount>0</timeoutcount>
+    </query>
+    <query nr="6">
+      <querystring><![CDATA[
+
+			
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX chembl: <http://rdf.farmbio.uu.se/chembl/onto/#> 
+PREFIX sio: <http://semanticscience.org/resource/> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX chemspider: <http://rdf.chemspider.com/#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+SELECT DISTINCT ?target_name ?compound_name ?csid_uri ?smiles ?inchi ?inchi_key ?molweight ?num_ro5_violations ?std_type ?relation ?std_value ?std_unit ?target_organism 
+WHERE { 
+        GRAPH <http://www.conceptwiki.org> { 
+                <http://www.conceptwiki.org/concept/ef670bcb-4bd9-4cc4-9214-a596dc0fc3d8> skos:prefLabel ?target_name ;
+                            skos:exactMatch ?chemblid .
+                ?compound_cw skos:exactMatch ?csid_uri ; 
+                         skos:prefLabel ?compound_name . 
+        } 
+        GRAPH <http://data.kasabi.com/dataset/chembl-rdf> { 
+                ?chemblid chembl:organism ?target_organism .  
+                ?assay_uri chembl:hasTarget ?chemblid . 
+                ?activity_uri chembl:onAssay ?assay_uri ; 
+                        chembl:type ?std_type ; 
+                        chembl:relation ?relation ; 
+                        chembl:standardValue ?std_value ; 
+                        chembl:standardUnits ?std_unit ; 
+                        chembl:forMolecule ?compound_uri . 
+                ?compound_uri owl:equivalentClass ?equiv_uri .  
+                ?equiv_uri skos:exactMatch ?csid_uri . 
+                OPTIONAL { ?compound_uri sio:CHEMINF_000200 _:node1 .  
+                        _:node1 a sio:CHEMINF_000314 ; 
+                                sio:SIO_000300 ?num_ro5_violations } 
+                OPTIONAL { ?compound_uri sio:CHEMINF_000200 _:node2 .  
+                        _:node2 a sio:CHEMINF_000198 ; 
+                                sio:SIO_000300 ?molweight } 
+        } 
+        GRAPH <http://www.chemspider.com> { 
+                ?csid_uri chemspider:inchi ?inchi; 
+                        chemspider:inchikey ?inchi_key; 
+                        chemspider:smiles ?smiles . 
+        } 
+} 
+			
+		
+
+       ]]>
+      </querystring>
+      <executecount>50</executecount>
+      <aqet>0.105772</aqet>
+      <aqetg>0.105388</aqetg>
+      <qps>9.45</qps>
+      <minqet>0.08571900</minqet>
+      <maxqet>0.13801700</maxqet>
+      <avgresults>1059.00</avgresults>
+      <minresults>1059</minresults>
+      <maxresults>1059</maxresults>
+      <timeoutcount>0</timeoutcount>
+    </query>
+  </queries>
+</bsbm>
