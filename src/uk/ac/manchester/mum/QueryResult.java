@@ -59,5 +59,16 @@ public class QueryResult {
 	public void setTimeoutCount(int timeoutCount) {
 		this.timeoutCount = timeoutCount;
 	}
+
+	public String toCSV() {
+		StringBuilder output = new StringBuilder();
+		output.append(experimentType).append(",");
+		output.append(queryNumber).append(",");
+		output.append(seedValue).append(",");
+		output.append(averageNumberResults).append(",");
+		output.append(averageExecutionTime).append(",");
+		output.append(timeoutCount);
+		return output.toString();
+	}
 	
 }
