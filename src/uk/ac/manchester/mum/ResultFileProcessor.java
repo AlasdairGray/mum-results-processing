@@ -1,8 +1,8 @@
 package uk.ac.manchester.mum;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,12 +16,12 @@ import org.xml.sax.SAXException;
 
 public class ResultFileProcessor {
 	
-	public Map<Integer, QueryResult> readXML(String filename, ExperimentType experimentType) throws ResultProcessorException {
+	public Collection<QueryResult> readXML(String filename, ExperimentType experimentType) throws ResultProcessorException {
         Document dom;
         // Make an  instance of the DocumentBuilderFactory
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         try {
-        	Map<Integer, QueryResult> results = new HashMap<Integer, QueryResult>();
+        	Collection<QueryResult> results = new ArrayList<QueryResult>();
             // use the factory to take an instance of the document builder
             DocumentBuilder db = dbf.newDocumentBuilder();
             // parse using the builder to get the DOM mapping of the    
@@ -32,7 +32,7 @@ public class ResultFileProcessor {
             NodeList nl = doc.getElementsByTagName("query");
             for(int i = 0; i < nl.getLength(); i++) {
             	QueryResult queryResult = processQuery((Element) nl.item(i), experimentType);
-            	results.put(new Integer(queryResult.getQueryNumber()), queryResult);
+            	results.add(queryResult);
             }
             return results;
         } catch (ParserConfigurationException pce) {
